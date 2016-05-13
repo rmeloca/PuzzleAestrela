@@ -47,13 +47,16 @@ public class Aestrela {
                     possibleInstances.add(clone);
                 }
             }
+            if (possibleInstances.isEmpty()) {
+                break;
+            }
             atualInstance = getBestInstance(possibleInstances);
             this.previousIntances.add(atualInstance);
         }
         return this.previousIntances;
     }
 
-    //36 * NumPecasTrocadas +  18 * DistaciaManhattan + 2 * NumInversoes
+    //18(manhattanDistance(initial, son) + manhattanDistance(son, solution)) + 36(numeroPecasTrocadas)
     private Puzzle getBestInstance(List<Puzzle> possibleInstances) {
         Puzzle bestInstance = null;
         int minorDistance = Integer.MAX_VALUE;
@@ -61,6 +64,8 @@ public class Aestrela {
         for (Puzzle possibleInstance : possibleInstances) {
             distance = possibleInstance.getManhattanDistance(this.solutionInstance);
             distance += possibleInstance.getManhattanDistance(this.initialInstance);
+            distance *= 18;
+            distance += 36 * possibleInstance.getNumeroPecasTrocadas();
             if (distance < minorDistance) {
                 minorDistance = distance;
                 bestInstance = possibleInstance;
