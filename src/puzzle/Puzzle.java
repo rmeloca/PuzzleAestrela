@@ -15,7 +15,7 @@ import java.util.Random;
  */
 public class Puzzle {
 
-    private byte[] tabuleiro;
+    private final byte[] tabuleiro;
     private byte nineIndex;
 
     public Puzzle() {
