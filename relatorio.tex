@@ -1,0 +1,101 @@
+\documentclass[12pt]{article}
+
+\usepackage{sbc-template}
+\usepackage{graphicx,url}
+\usepackage[brazil]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{lscape}
+\usepackage{geometry}
+\usepackage{float}
+
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{makeidx}
+\usepackage{graphicx}
+\usepackage{lmodern}
+\usepackage{enumerate}
+\usepackage{latexsym}
+\usepackage{longtable}
+\usepackage[all]{xy}
+\usepackage{float}
+\usepackage{lscape}
+\usepackage{mathrsfs}
+\usepackage{fancyhdr}
+\usepackage{boxedminipage}
+\usepackage{enumitem}
+
+
+\sloppy
+
+\title{Solução do 8-\textit{Puzzle} por meio do algoritmo A*}
+
+\author{Marco Cezar Moreira de Mattos\inst{1}, Rômulo Manciola Meloca\inst{1}}
+
+\address{DACOM -- Universidade Tecnológica Federal do Paraná (UTFPR)\\
+  Caixa Postal 271 -- 87301-899 -- Campo Mourão -- PR -- Brazil
+  \email{\{marco.cmm,rmeloca\}@gmail.com}
+}
+
+\begin{document}
+
+	\maketitle
+
+	\begin{abstract}
+
+	\end{abstract}
+
+	\begin{resumo} 
+
+	\end{resumo}
+
+	\section{O Problema}\label{sec:problema}
+
+		O jogo 8-\textit{Puzzle}, aos olhos humanos possui uma solução, que embora não seja trivial, bastante intuitiva, dado seu objetivo. Consiste em um tabuleiro 3x3 sobre o qual deslizam oito peças enumeradas, onde os únicos movimentos possíveis para se atingir o objetivo são aqueles permitidos pelo buraco deixado pela nona peça. O objetivo do jogo é ordenar o tabuleiro.
+
+		O problema ocorre quando não há um agente dotado de intelecto para resolver o problema, não pela complexidade das verificações feitas para atingir-se o objetivo, mas sobre quais decisões devem ser tomadas em cada estado do problema, para atingir-se a solução do problema.
+
+		O espaço dos estados do 8-\textit{Puzzle} é 9! e a solução ótima tem classe NP-Completo, portanto, sortear o próximo estado ou expandir todas as possíveis soluções jamais poderia obter a solução em tempo plausível, o primeiro porque a aleatoriedade possui a mesma probabilidade de caminhar rumo a solução quanto de caminhar no sentido oposto, o segundo porque demandaria processamento e memória difíceis de serem obtidos.
+
+		Enfim, problemas cujos espaço dos estados fogem da possibilidade viável de computação dado a complexidade do algoritmo, são resolvíveis por meio do uso de inteligência artificial, que, muito embora não forneça a melhor solução, fornece uma solução muito boa em tempo muito bom (é claro que alguns tipos de problemas são melhores resolvidos com determinados tipos de algoritmos observando-se os determinados parâmetros que o fazem comportar-se bem).
+
+		Para o 8-\textit{Puzzle} é possível lançar-se mão desta categoria de algoritmos, contudo neste trabalho, utilizou-se o algoritmo A* que não é capaz de aprender (uma vez que armazenar resultados anteriores e observar se já foram visitados não é aprendizagem de máquina), mas que retorna um resultado muito bom em tempo viável dado sua capacidade de ignorar estados que afastam-se do objetivo e caminhar sempre rumo a ele.
+
+	\section{Organização da Solução}\label{sec:solucao}
+
+
+		\subsection{Diagramação}\label{sec:diagramacao}
+
+
+		\subsection{Interfaces}\label{sec:interfaces}
+
+
+		\subsection{Protocolo}\label{sec:protocolo}
+
+
+	\section{Implementação}\label{sec:implementacao}
+
+	Implementou-se a solução utilizando a linguagem de programação Java, contando com um objeto Puzzle e abstrações para os movimentos possíveis.
+
+	A heurística utilizada foi distância de Manhattan combinada com segundo [1] refrências latex.
+
+	\section{Resultados}\label{sec:resultados}	
+
+
+	\section{Considerações Finais}\label{sec:consideracoesFiinais}
+
+	\section{References}
+
+	Bibliographic references must be unambiguous and uniform.  We recommend giving
+	the author names references in brackets, e.g. \cite{knuth:84},
+	\cite{boulic:91}, and \cite{smith:99}.
+
+	The references must be listed using 12 point font size, with 6 points of space
+	before each reference. The first line of each reference should not be
+	indented, while the subsequent should be indented by 0.5 cm.
+
+\bibliographystyle{sbc}
+\bibliography{sbc-template}
+
+\end{document}
