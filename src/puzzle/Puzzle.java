@@ -16,7 +16,6 @@ import java.util.Random;
 public class Puzzle {
 
     private byte[] tabuleiro;
-    private Tabuleiro tabuleiroMatriz;
     private byte nineIndex;
 
     public Puzzle() {
@@ -28,18 +27,6 @@ public class Puzzle {
 
     public Puzzle(byte[] tabuleiro) {
         this.tabuleiro = tabuleiro;
-        sincronizarNineIndex();
-    }
-
-    public Puzzle(byte[][] tabuleiro) {
-        for (byte i = 0; i < tabuleiro.length; i++) {
-            for (byte j = 0; j < tabuleiro.length; j++) {
-                if (tabuleiro[i][j] == 9) {
-                    this.nineIndex = i;
-                }
-            }
-
-        }
         sincronizarNineIndex();
     }
 
@@ -148,41 +135,31 @@ public class Puzzle {
         return sum;
     }
 
+    @Deprecated
     private int getManDist() {
         int index = 0;
         int manDist = 0;
 
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++, index++) {
+        for (int linhaAtual = 0; linhaAtual < 3; linhaAtual++) {
+            for (int colunaAtual = 0; colunaAtual < 3; colunaAtual++, index++) {
                 int posicaoObjetivo = (tabuleiro[index] - 1);
                 int colunaObjetivo = posicaoObjetivo % 3;
                 int linhaObjetivo = posicaoObjetivo / 3;
 
-                manDist += Math.abs(linhaObjetivo - i) + Math.abs(colunaObjetivo - j);
+                manDist += Math.abs(linhaObjetivo - linhaAtual) + Math.abs(colunaObjetivo - colunaAtual);
             }
         }
         return manDist;
     }
 
     private int getDistance(int indexA, int indexB) {
-        if (indexA == indexB) {
-            return 0;
-        }
-        if (indexA - indexB == 1 || indexB - indexA == 1) {
-            return 1;
-        }
-        if (indexA - indexB == 2 || indexB - indexA == 2) {
-            return 2;
-        }
+        int colunaObjetivo = indexB % 3;
+        int linhaObjetivo = indexB / 3;
 
-        if (indexA < indexB) {
-            if (indexA < 3 || indexB < 3) {
+        int colunaAtual = indexA % 3;
+        int linhaAtual = indexA / 3;
 
-            }
-            if (indexA > 5 || indexB > 5) {
-            }
-        }
-        throw new UnsupportedOperationException();
+        return Math.abs(linhaObjetivo - linhaAtual) + Math.abs(colunaObjetivo - colunaAtual);
     }
 
     private int getIndex(int valor) {
@@ -198,11 +175,6 @@ public class Puzzle {
         return getNumeroPecasTrocadas() > 0;
     }
 
-    @Override
-    public Object clone() {
-        return new Puzzle(this.tabuleiro);
-    }
-
     public void print() {
         for (byte i = 0; i < tabuleiro.length; i += 3) {
             for (byte j = i; j < i + 3; j++) {
@@ -214,6 +186,22 @@ public class Puzzle {
             }
             System.out.println();
         }
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        Puzzle instance = (Puzzle) obj;
+        for (byte i = 0; i < tabuleiro.length; i++) {
+            if (instance.tabuleiro[i] != this.tabuleiro[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public Object clone() {
+        return new Puzzle(this.tabuleiro);
     }
 
 }

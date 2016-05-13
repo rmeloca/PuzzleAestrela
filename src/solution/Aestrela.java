@@ -43,7 +43,9 @@ public class Aestrela {
             for (Coordinate possibleMovement : possibleMovements) {
                 clone = (Puzzle) atualInstance.clone();
                 clone.move(possibleMovement);
-                possibleInstances.add(clone);
+                if (!this.previousIntances.contains(clone)) {
+                    possibleInstances.add(clone);
+                }
             }
             atualInstance = getBestInstance(possibleInstances);
             this.previousIntances.add(atualInstance);
