@@ -26,7 +26,10 @@ public class Puzzle {
     }
 
     public Puzzle(byte[] tabuleiro) {
-        this.tabuleiro = tabuleiro;
+        this.tabuleiro = new byte[9];
+        for (byte i = 0; i < tabuleiro.length; i++) {
+            this.tabuleiro[i] = tabuleiro[i];
+        }
         sincronizarNineIndex();
     }
 
@@ -172,10 +175,11 @@ public class Puzzle {
     }
 
     public boolean isSolved() {
-        return getNumeroPecasTrocadas() > 0;
+        return getNumeroPecasTrocadas() == 0;
     }
 
     public void print() {
+        System.out.println("--------");
         for (byte i = 0; i < tabuleiro.length; i += 3) {
             for (byte j = i; j < i + 3; j++) {
                 if (tabuleiro[j] == 9) {
@@ -186,6 +190,7 @@ public class Puzzle {
             }
             System.out.println();
         }
+        System.out.println();
     }
 
     @Override

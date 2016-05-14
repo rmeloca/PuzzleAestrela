@@ -24,6 +24,8 @@ public class PuzzleTest {
     public void testSomeMethod() {
         puzzle.print();
         puzzle.move(Coordinate.NORTH);
+        puzzle.move(Coordinate.NORTH);
+        puzzle.move(Coordinate.NORTH);
         puzzle.print();
     }
 
