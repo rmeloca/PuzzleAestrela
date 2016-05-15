@@ -120,7 +120,7 @@ public class Puzzle {
         return true;
     }
 
-    public int getNumeroPecasTrocadas() {
+    public int getQuantidadePecasTrocadas() {
         int numeroPecasTrocadas = 0;
         for (byte i = 0; i < tabuleiro.length; i++) {
             if (this.tabuleiro[i] != i + 1) {
@@ -130,10 +130,20 @@ public class Puzzle {
         return numeroPecasTrocadas;
     }
 
-    public int getManhattanDistance(Puzzle puzzle) {
+    public int getQuantidadePecasTrocadas(Puzzle diffTo) {
+        int numeroPecasTrocadas = 0;
+        for (byte i = 0; i < tabuleiro.length; i++) {
+            if (this.tabuleiro[i] != diffTo.tabuleiro[i]) {
+                numeroPecasTrocadas++;
+            }
+        }
+        return numeroPecasTrocadas;
+    }
+
+    public int getManhattanDistance(Puzzle diffTo) {
         int sum = 0;
         for (byte i = 0; i < this.tabuleiro.length; i++) {
-            sum += getDistance(i, puzzle.getIndex(this.tabuleiro[i]));
+            sum += getDistance(i, diffTo.getIndex(this.tabuleiro[i]));
         }
         return sum;
     }
@@ -175,7 +185,7 @@ public class Puzzle {
     }
 
     public boolean isSolved() {
-        return getNumeroPecasTrocadas() == 0;
+        return getQuantidadePecasTrocadas() == 0;
     }
 
     public void print() {

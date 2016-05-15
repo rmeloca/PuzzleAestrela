@@ -56,16 +56,18 @@ public class Aestrela {
         return this.previousIntances;
     }
 
-    //18(manhattanDistance(initial, son) + manhattanDistance(son, solution)) + 36(numeroPecasTrocadas)
     private Puzzle getBestInstance(List<Puzzle> possibleInstances) {
         Puzzle bestInstance = null;
         int minorDistance = Integer.MAX_VALUE;
-        int distance;
+        int distance, pecasTrocadas;
         for (Puzzle possibleInstance : possibleInstances) {
-            distance = possibleInstance.getManhattanDistance(this.solutionInstance);
-            distance += possibleInstance.getManhattanDistance(this.initialInstance);
+            distance = possibleInstance.getManhattanDistance(this.initialInstance);
+            distance += possibleInstance.getManhattanDistance(this.solutionInstance);
             distance *= 18;
-            distance += 36 * possibleInstance.getNumeroPecasTrocadas();
+            pecasTrocadas = possibleInstance.getQuantidadePecasTrocadas(this.solutionInstance);
+//            pecasTrocadas += possibleInstance.getQuantidadePecasTrocadas(this.initialInstance);
+            pecasTrocadas *= 36;
+            distance += pecasTrocadas;
             if (distance < minorDistance) {
                 minorDistance = distance;
                 bestInstance = possibleInstance;
