@@ -25,6 +25,10 @@ public class Puzzle {
         sincronizarNineIndex();
     }
 
+    /**
+     *
+     * @param tabuleiro Cria um puzzle a partir de um tabuleiro
+     */
     public Puzzle(byte[] tabuleiro) {
         this.tabuleiro = new byte[9];
         for (byte i = 0; i < tabuleiro.length; i++) {
@@ -33,12 +37,19 @@ public class Puzzle {
         sincronizarNineIndex();
     }
 
+    /**
+     * Cria um tabuleiro com as posições na posição certa
+     */
     private void inicializar() {
         for (byte i = 0; i < tabuleiro.length; i++) {
             tabuleiro[i] = (byte) (i + 1);
         }
     }
 
+    /**
+     *Descobre a posição do tabuleiro que está vazia. 
+     *A posição vazia é representada pelo numero 9
+     */
     private void sincronizarNineIndex() {
         for (byte i = 0; i < tabuleiro.length; i++) {
             if (tabuleiro[i] == 9) {
@@ -47,7 +58,9 @@ public class Puzzle {
             }
         }
     }
-
+    /**
+     * Deixa os valores do tabuleiro aleatórios
+     */
     private void embaralhar() {
         Random random = new Random();
         byte a, b, tmp;
@@ -59,7 +72,11 @@ public class Puzzle {
             tabuleiro[b] = tmp;
         }
     }
-
+/**
+ * Verifica se é possivel mover uma peça no tabuleiro
+ * @param coordinate
+ * @return true se é possivel fazer o movimento, false se não
+ */
     private boolean canMove(Coordinate coordinate) {
         switch (coordinate) {
             case NORTH:
@@ -74,7 +91,11 @@ public class Puzzle {
                 return false;
         }
     }
-
+    /**
+     * Dado a coordenada, retorna para onde deve ser o destino do conteudo daquela posição
+     * @param coordinate
+     * @return 
+     */
     private byte sumIndex(Coordinate coordinate) {
         switch (coordinate) {
             case NORTH:
@@ -89,7 +110,10 @@ public class Puzzle {
                 return 0;
         }
     }
-
+    /**
+     * Diz os possíveis movimentos que podem ser feitos atualmente nos puzzle
+     * @return 
+     */
     public List<Coordinate> getPossibleMovements() {
         List<Coordinate> coordinates = new ArrayList<>();
         if (canMove(Coordinate.NORTH)) {
@@ -106,7 +130,11 @@ public class Puzzle {
         }
         return coordinates;
     }
-
+    /**
+     * Faz o movimento no tabuleiro
+     * @param coordinate
+     * @return se foi possível fazer o movimento
+     */
     public boolean move(Coordinate coordinate) {
         if (coordinate == null) {
             return false;
@@ -119,7 +147,10 @@ public class Puzzle {
         tabuleiro[nineIndex] = 9;
         return true;
     }
-
+    /**
+     * Verifica a quantidade de peças que foram movidas no tabuleiro
+     * @return 
+     */
     public int getQuantidadePecasTrocadas() {
         int numeroPecasTrocadas = 0;
         for (byte i = 0; i < tabuleiro.length; i++) {
@@ -139,7 +170,11 @@ public class Puzzle {
         }
         return numeroPecasTrocadas;
     }
-
+    /**
+     * Calcula a distância de manhattan
+     * @param diffTo
+     * @return 
+     */
     public int getManhattanDistance(Puzzle diffTo) {
         int sum = 0;
         for (byte i = 0; i < this.tabuleiro.length; i++) {
@@ -164,7 +199,12 @@ public class Puzzle {
         }
         return manDist;
     }
-
+    /**
+     * Calcula a distância entre os indexs 
+     * @param indexA
+     * @param indexB
+     * @return 
+     */
     private int getDistance(int indexA, int indexB) {
         int colunaObjetivo = indexB % 3;
         int linhaObjetivo = indexB / 3;
@@ -174,7 +214,11 @@ public class Puzzle {
 
         return Math.abs(linhaObjetivo - linhaAtual) + Math.abs(colunaObjetivo - colunaAtual);
     }
-
+/**
+ * 
+ * @param valor
+ * @return O valor que está contido no index
+ */
     private int getIndex(int valor) {
         for (byte i = 0; i < tabuleiro.length; i++) {
             if (this.tabuleiro[i] == valor) {
@@ -183,11 +227,16 @@ public class Puzzle {
         }
         return -1;
     }
-
+/**
+ * Verifica se o puzzle está resolvido
+ * @return 
+ */
     public boolean isSolved() {
         return getQuantidadePecasTrocadas() == 0;
     }
-
+/**
+ * Printa o tabuleiro 
+ */
     public void print() {
         System.out.println("--------");
         for (byte i = 0; i < tabuleiro.length; i += 3) {
