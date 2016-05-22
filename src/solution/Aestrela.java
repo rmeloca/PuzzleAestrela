@@ -26,10 +26,12 @@ public class Aestrela {
         byte[] tabuleiro = {1, 2, 3, 4, 5, 6, 7, 8, 9};
         this.solutionInstance = new Puzzle(tabuleiro);
     }
-/**
- * Obtém o caminho percorrido para obter a solução
- * @return 
- */
+
+    /**
+     * Obtém o caminho percorrido para obter a solução
+     *
+     * @return
+     */
     public List<Puzzle> getSolution() {
         List<Puzzle> possibleInstances;
         List<Coordinate> possibleMovements;
@@ -58,10 +60,12 @@ public class Aestrela {
         }
         return this.previousIntances;
     }
+
     /**
-     * Obtém a melhor instância 
+     * Obtém a melhor instância
+     *
      * @param possibleInstances
-     * @return 
+     * @return
      */
     private Puzzle getBestInstance(List<Puzzle> possibleInstances) {
         Puzzle bestInstance = null;
